@@ -1,0 +1,7 @@
+.ipynb_checkpoints
+old/
+__pycache__/
+.ipynb_checkpoints/
+scripts/.ipynb_checkpoints
+scripts/old
+timeseries_dictionary.npy
