@@ -5,3 +5,4 @@ __pycache__/
 scripts/.ipynb_checkpoints
 scripts/old
 timeseries_dictionary.npy
+ts_data.npy
