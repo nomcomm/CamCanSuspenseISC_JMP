@@ -6,6 +6,7 @@ from scipy.spatial.distance import squareform
 from scipy.stats import pearsonr, zscore
 from scipy.fftpack import fft, ifft
 import itertools as it
+import sys
 
 
 def camcan_isc(data, pairwise=False, summary_statistic=None, verbose=True):
@@ -282,3 +283,75 @@ def camcan_phaseshift_isc(data, pairwise=False, summary_statistic=np.median,
         return observed, p, distribution
     elif not return_distribution:
         return observed, p
+        
+        
+def camcan_sliding_isc(data, pos_win = 7, neg_win = 7, minimum_length = 5, verbose=True):
+    """Intersubject correlation over sliding window.
+    For each
+        
+    ----------
+    data : ndarray
+        data for which to compute ISC with time as first axis, voxels/regions as second, and subjects along the 3rd axis
+        
+    pos_win : int, default: 7
+        the window width to the right (i.e. how many samples looking ahead)
+        
+    neg_win : int, default: 7
+        the window width to the left (i.e. how many samples looking into the past)
+    
+    minimum_lenght : int, default: 5
+        the minimum window width required to compute ISC in the first place - if the available data is shorter (at the fringes)
+        then the results will be zero-ed.
+        
+    Returns
+    -------
+    time_by_region_isc array 
+    """
+
+    # Infer subjects, TRs, voxels and print for user to check
+    n_subjects = data.shape[2]
+    n_TRs = data.shape[0]
+    n_voxels = data.shape[1]
+    
+    
+    print(f"Assuming {n_subjects} subjects with {n_TRs} time points "
+          f"and {n_voxels} voxel(s) or ROI(s).\n"
+          f"Will compute sliding window analysis with a window length of -{neg_win} and +{pos_win} samples.")
+
+    time_by_region_isc = []
+    
+    for curr_win_index in range(0, n_TRs ):
+        
+        # determine window onsets (with window looking backwards). 
+        # This could be changed, but seems best for this purpose
+        curr_win_offset_index = curr_win_index + pos_win 
+        curr_win_onset_index = curr_win_index - neg_win  
+        
+        if (curr_win_onset_index < 0): # get rid of index values that are below zero
+            curr_win_onset_index = 0
+            
+        if (curr_win_index > n_TRs):  # get rid of index values that are above n_TRs
+            curr_win_offset_index = n_TRs
+            
+            
+        #print(' on ' + str(curr_win_onset_index) + ' center ' + str(curr_win_index) +'  off ' + str(curr_win_offset_index) )
+       
+        # grab the data & compute the correlation (if sufficient data)
+        if ((curr_win_offset_index - curr_win_onset_index) < minimum_length):
+            ISC = np.zeros(n_voxels)
+        else:
+            curr_win_D =data[curr_win_onset_index : curr_win_offset_index, :, :]
+            ISC = np.squeeze(camcan_isc(curr_win_D, summary_statistic=np.mean, verbose = False))
+            ISC[np.isnan(ISC)] = 0
+
+        # append the results
+        time_by_region_isc.append(ISC)
+        
+        if verbose:
+            progress = 100 * ( curr_win_index/n_TRs)
+            sys.stdout.write("\r%d%%" % progress)
+            sys.stdout.flush()   
+
+    time_by_region_isc = np.asarray(time_by_region_isc)
+    return time_by_region_isc
+
