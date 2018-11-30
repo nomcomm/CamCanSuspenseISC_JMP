@@ -3,6 +3,11 @@ Analysis for Schmälzle & Grall (under review)
 
 Data and analysis code for describe *CITATION* [link](link) [External Link]
 
+***
+
+<img align="right" width=250px src=data/explainer_fig.png> 
+
+
 ### Code
 
 -   The [notebook to reproduce the analysis of the main effect of
