@@ -195,7 +195,7 @@ def camcan_phaseshift_isc(data, pairwise=False, summary_statistic=np.median,
     n_voxels = data.shape[1]
     
     # Get actual observed ISC
-    observed = camcan_isc(data, pairwise=pairwise, summary_statistic=summary_statistic)
+    observed = camcan_isc(data, pairwise=pairwise, summary_statistic=summary_statistic, verbose=False)
     
     # Iterate through randomized shifts to create null distribution
     distribution = []
@@ -315,8 +315,8 @@ def camcan_sliding_isc(data, pos_win = 7, neg_win = 7, minimum_length = 5, verbo
     
     
     print(f"Assuming {n_subjects} subjects with {n_TRs} time points "
-          f"and {n_voxels} voxel(s) or ROI(s).\n"
-          f"Will compute sliding window analysis with a window length of -{neg_win} and +{pos_win} samples.")
+          f"and {n_voxels} voxel(s) or ROI(s).\n")
+          #f"Will compute sliding window analysis with a window length of -{neg_win} and +{pos_win} samples.")
 
     time_by_region_isc = []
     
