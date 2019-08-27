@@ -1,0 +1,40 @@
+name: base
+channels:
+  - defaults
+dependencies:
+  - _ipyw_jlab_nb_ext_conf=0.1.0=py37_0
+  - anaconda-client=1.7.2=py37_0
+  - anaconda-navigator=1.9.7=py37_0
+  - conda=4.7.11=py37_0
+  - conda-build=3.18.9=py37_0
+  - conda-env=2.6.0=1
+  - conda-package-handling=1.3.11=py37_0
+  - jupyter=1.0.0=py37_7
+  - jupyter_client=5.3.1=py_0
+  - jupyter_console=6.0.0=py37_0
+  - jupyter_core=4.5.0=py_0
+  - jupyterlab=1.0.2=py37hf63ae98_0
+  - jupyterlab_server=1.0.0=py_0
+  - numpy-base=1.16.4=py37h6575580_0
+  - scipy=1.3.0=py37h1410ff5_0
+  - seaborn=0.9.0=py37_0
+  - statsmodels=0.10.1=py37h1d22016_0
+  - pip:
+    - docker==4.0.2
+    - ipykernel==5.1.0
+    - ipython==7.2.0
+    - ipython-genutils==0.2.0
+    - ipywidgets==7.4.2
+    - jupyter-client==5.2.4
+    - jupyter-console==6.0.0
+    - nibabel==2.3.1
+    - nilearn==0.5.0
+    - nistats==0.0.1b0
+    - notebook==5.7.4
+    - numpy==1.14.5
+    - pandas==0.23.4
+    - pip==18.1
+    - scikit-learn==0.19.2
+    - sklearn==0.0
+prefix: /Users/Ralf/anaconda3
+
