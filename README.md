@@ -1,7 +1,7 @@
-Analysis for Schmälzle & Grall (under review)
+Analysis for Schmälzle & Grall (2020)
 =============================================
 
-Data and analysis code for describe *The coupled brains of captivated audiences: An investigation of the collective brain dynamics of an audience watching a suspenseful film* [link](link) [External Link]
+Data and analysis code for describe *The coupled brains of captivated audiences: An investigation of the collective brain dynamics of an audience watching a suspenseful film* [link](link) [http://www.ralfschmaelzle.net/wp-content/papercite-data/pdf/schmaelzle2020coupled.pdf]
 
 ***
 
